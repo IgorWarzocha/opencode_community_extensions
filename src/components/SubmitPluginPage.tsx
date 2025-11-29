@@ -71,7 +71,7 @@ export function SubmitPluginPage({
               type="text"
               name="name"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="rust-analyzer"
             />
           </div>
@@ -84,7 +84,7 @@ export function SubmitPluginPage({
               type="text"
               name="slug"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="rust-analyzer"
             />
           </div>
@@ -97,7 +97,7 @@ export function SubmitPluginPage({
               type="text"
               name="shortDescription"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="Official Rust language server with IDE features"
             />
           </div>
@@ -110,7 +110,7 @@ export function SubmitPluginPage({
               name="description"
               required
               rows={4}
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="Detailed description of your plugin..."
             />
           </div>
@@ -130,7 +130,7 @@ export function SubmitPluginPage({
             <select
               name="category"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
             >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
@@ -147,7 +147,7 @@ export function SubmitPluginPage({
             <input
               type="text"
               name="tags"
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="rust, lsp, ide, compiler"
             />
           </div>
@@ -181,7 +181,7 @@ export function SubmitPluginPage({
             <textarea
               name="features"
               rows={5}
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="Fast incremental compilation&#10;Smart code completion&#10;Inline type hints"
             />
           </div>
@@ -202,7 +202,7 @@ export function SubmitPluginPage({
               type="url"
               name="repoUrl"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="https://github.com/username/plugin"
             />
           </div>
@@ -214,7 +214,7 @@ export function SubmitPluginPage({
             <input
               type="url"
               name="docsUrl"
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="https://docs.example.com"
             />
           </div>
@@ -227,7 +227,7 @@ export function SubmitPluginPage({
               type="text"
               name="version"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="1.0.0"
             />
           </div>
@@ -240,7 +240,7 @@ export function SubmitPluginPage({
               type="text"
               name="authorName"
               required
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="John Doe"
             />
           </div>
@@ -252,7 +252,7 @@ export function SubmitPluginPage({
             <input
               type="text"
               name="authorGithub"
-              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono transition-colors dark:bg-surface-dark dark:border-border-dark dark:focus:border-primary-dark"
+              className="w-full px-4 py-2 border border-border focus:border-primary focus:outline-none text-sm bg-surface font-mono text-primary placeholder:text-secondary transition-colors dark:bg-surface-dark dark:text-primary-dark dark:border-border-dark dark:focus:border-primary-dark dark:placeholder:text-secondary-dark"
               placeholder="johndoe"
             />
           </div>
