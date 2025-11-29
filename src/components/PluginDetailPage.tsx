@@ -39,7 +39,7 @@ export function PluginDetailPage({
             ← Back to directory
           </button>
         </div>
-        <div className="text-secondary">Plugin not found.</div>
+        <div className="text-secondary">Extension not found.</div>
       </div>
     );
   }
@@ -167,7 +167,7 @@ export function PluginDetailPage({
           <div className="border-t border-border mb-12"></div>
           <div>
             <h2 className="text-2xl font-semibold mb-6">
-              Related {plugin.category} Plugins
+              Related {plugin.category} Extensions
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {relatedPlugins.map((related) => (

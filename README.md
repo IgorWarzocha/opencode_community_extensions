@@ -1,29 +1,77 @@
-# OpenCode Plugin Directory
-  
-This is a project built with [Chef](https://chef.convex.dev) using [Convex](https://convex.dev) as its backend.
- You can find docs about Chef with useful information like how to deploy to production [here](https://docs.convex.dev/chef).
-  
-This project is connected to the Convex deployment named [`fine-jaguar-537`](https://dashboard.convex.dev/d/fine-jaguar-537).
-  
-## Project structure
-  
-The frontend code is in the `app` directory and is built with [Vite](https://vitejs.dev/).
-  
-The backend code is in the `convex` directory.
-  
-`npm run dev` will start the frontend and backend servers.
+# Opencode Community Extensions
 
-## App authentication
+Discover and explore community-built extensions for the Opencode ecosystem. Browse a curated collection of plugins, tools, and integrations that enhance your development workflow.
 
-Chef apps use [Convex Auth](https://auth.convex.dev/) with Anonymous auth for easy sign in. You may wish to change this before deploying your app.
+## What You'll Find
 
-## Developing and deploying your app
+### Extension Categories
 
-Check out the [Convex docs](https://docs.convex.dev/) for more information on how to develop with Convex.
-* If you're new to Convex, the [Overview](https://docs.convex.dev/understanding/) is a good place to start
-* Check out the [Hosting and Deployment](https://docs.convex.dev/production/) docs for how to deploy your app
-* Read the [Best Practices](https://docs.convex.dev/understanding/best-practices/) guide for tips on how to improve you app further
+- **LSP** - Language Server Protocol extensions for enhanced code intelligence
+- **RAG/Search** - Retrieval-augmented generation and search tools
+- **DevOps** - Deployment, CI/CD, and infrastructure extensions
+- **UI** - User interface enhancements and themes
+- **Workflow** - Productivity tools and workflow automations
 
-## HTTP API
+### Extension Features
 
-User-defined http routes are defined in the `convex/router.ts` file. We split these routes into a separate file from `convex/http.ts` to allow us to prevent the LLM from modifying the authentication routes.
+Each extension includes:
+
+- **Detailed Description** - What the extension does and how it helps
+- **Compatibility** - Supported platforms (TUI, CLI, IDE, Server, Zen)
+- **Source Code** - Links to repositories and documentation
+- **Version Information** - Latest releases and changelogs
+- **Author Information** - Creator details and GitHub profiles
+
+## How It Works
+
+### Browse Extensions
+
+Explore the extension directory with powerful filtering and search:
+
+- **Search** - Find extensions by name or description
+- **Category Filter** - Focus on specific types of tools
+- **Compatibility Filter** - Find extensions for your platform
+- **Tag-Based Discovery** - Browse by functionality and features
+
+### Submit Extensions
+
+Community members can submit new extensions:
+
+- **Simple Form** - Add extension details through our submission form
+- **Validation** - Ensure quality and completeness of submissions
+- **Community Review** - All submissions reviewed before publication
+
+### Extension Details
+
+Each extension page provides:
+
+- **Overview** - Clear description of functionality and benefits
+- **Technical Details** - Compatibility, requirements, and installation
+- **Related Extensions** - Discover similar tools in the same category
+- **Direct Links** - Quick access to source code and documentation
+
+## Technology
+
+This directory is built with modern web technologies:
+
+- **React 19.2** - Fast, responsive user interface
+- **TypeScript 5.9+** - Type-safe and reliable code
+- **Tailwind CSS 4.1** - Modern, clean design system
+- **Convex** - Real-time data synchronization
+
+## For Developers
+
+Interested in contributing extensions or improving the directory?
+
+- **Submit Extensions** - Share your tools with the community
+- **Open Source** - View the codebase on GitHub
+- **Modern Stack** - Built with cutting-edge web technologies
+- **Community Driven** - Extensions are curated and community-reviewed
+
+## Get Started
+
+Browse the [extension directory](https://your-domain.com) to discover tools that enhance your Opencode development experience.
+
+---
+
+_Part of the Opencode ecosystem - building better development tools together._

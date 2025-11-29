@@ -41,7 +41,7 @@ export async function submitPlugin(prevState: any, formData: FormData) {
 
     // For now, we'll simulate the submission since server actions with Convex require special setup
     // In a real implementation, you would call the Convex mutation here
-    console.log("Plugin submission data:", {
+    console.log("Extension submission data:", {
       name,
       slug,
       shortDescription,
@@ -60,13 +60,14 @@ export async function submitPlugin(prevState: any, formData: FormData) {
     // Simulate successful submission
     return {
       success: true,
-      message: "Plugin submitted successfully!",
+      message: "Extension submitted successfully!",
       slug,
     };
   } catch (error) {
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to submit plugin",
+      error:
+        error instanceof Error ? error.message : "Failed to submit extension",
     };
   }
 }

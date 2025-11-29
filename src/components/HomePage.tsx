@@ -36,7 +36,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Hero Section */}
       <div className="mb-16 max-w-3xl">
-        <h1 className="text-5xl font-bold mb-6">Plugin Directory</h1>
+        <h1 className="text-5xl font-bold mb-6">Extension Directory</h1>
         <p className="text-xl text-secondary mb-8 leading-relaxed">
           Extend OpenCode with community plugins. Language servers, search
           tools, DevOps integrations, UI enhancements, and workflow automation.

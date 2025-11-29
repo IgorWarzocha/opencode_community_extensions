@@ -11,13 +11,13 @@ export function Header({ onNavigateHome, onNavigateSubmit }: HeaderProps) {
           onClick={onNavigateHome}
           className="text-xl font-semibold hover:text-accent transition-colors"
         >
-          opencode/plugins
+          opencode/extensions
         </button>
         <button
           onClick={onNavigateSubmit}
           className="px-4 py-2 bg-primary text-white hover:bg-primary-hover transition-colors text-sm"
         >
-          Submit Plugin
+          Submit Extension
         </button>
       </div>
     </header>

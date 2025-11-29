@@ -45,7 +45,7 @@ export function SubmitPluginPage({
 
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Submit Plugin</h1>
+        <h1 className="text-4xl font-bold mb-4">Submit Extension</h1>
         <p className="text-secondary leading-relaxed">
           Share your plugin with the OpenCode community. Fill out the form below
           to add your plugin to the directory.
@@ -293,5 +293,5 @@ function SubmitButtonContent() {
     return "Submitting...";
   }
 
-  return "Submit Plugin";
+  return "Submit Extension";
 }
