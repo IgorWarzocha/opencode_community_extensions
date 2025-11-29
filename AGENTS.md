@@ -1,5 +1,16 @@
 # Agent Operations Guide
 
+## Available Documentation
+
+This repository includes comprehensive technology-specific documentation files:
+
+- **TS59.MD** - Complete TypeScript 5.9+ reference with modern patterns, configuration, and best practices
+- **TAILWIND4.md** - Tailwind CSS 4.1 specification with CSS-first architecture, v4.1 features, and migration guidance
+- **CONVEX.md** - Convex database and server functions guide with schema design, function patterns, and performance rules
+- **REACT19.md** - React 19+ reference covering Server Components, Actions, React Compiler, and modern hooks
+
+**Agent Usage**: Consult these files for detailed implementation guidance when working with respective technologies. They contain authoritative patterns and rules for this codebase.
+
 ## Build/Lint/Test Commands
 
 - `npm run dev` - Start frontend and backend in parallel

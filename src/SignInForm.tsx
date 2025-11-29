@@ -33,20 +33,24 @@ export function SignInForm() {
         }}
       >
         <input
-          className="auth-input-field"
+          className="auth-input-field hover:shadow-md focus:border-primary focus:ring-1 focus:ring-primary"
           type="email"
           name="email"
           placeholder="Email"
           required
         />
         <input
-          className="auth-input-field"
+          className="auth-input-field hover:shadow-md focus:border-primary focus:ring-1 focus:ring-primary"
           type="password"
           name="password"
           placeholder="Password"
           required
         />
-        <button className="auth-button" type="submit" disabled={submitting}>
+        <button
+          className="auth-button hover:bg-primary-hover hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+          type="submit"
+          disabled={submitting}
+        >
           {flow === "signIn" ? "Sign in" : "Sign up"}
         </button>
         <div className="text-center text-sm text-secondary">
@@ -69,7 +73,10 @@ export function SignInForm() {
         <span className="mx-4 text-secondary">or</span>
         <hr className="my-4 grow border-gray-200" />
       </div>
-      <button className="auth-button" onClick={() => void signIn("anonymous")}>
+      <button
+        className="auth-button hover:bg-primary-hover hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={() => void signIn("anonymous")}
+      >
         Sign in anonymously
       </button>
     </div>
