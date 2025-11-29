@@ -17,7 +17,7 @@ export function PluginDetailPage({
   const plugin = useQuery(api.plugins.getBySlug, { slug });
   const relatedPlugins = useQuery(
     api.plugins.getRelated,
-    plugin ? { category: plugin.category, currentSlug: slug } : "skip"
+    plugin ? { category: plugin.category, currentSlug: slug } : "skip",
   );
 
   if (plugin === undefined) {

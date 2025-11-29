@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useQuery, useMutation } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { Toaster } from "sonner";
 import { HomePage } from "./components/HomePage";
@@ -17,7 +17,9 @@ export default function App() {
 
   useEffect(() => {
     if (!hasSeeded) {
-      seedPlugins().then(() => setHasSeeded(true)).catch(() => setHasSeeded(true));
+      seedPlugins()
+        .then(() => setHasSeeded(true))
+        .catch(() => setHasSeeded(true));
     }
   }, [hasSeeded, seedPlugins]);
 

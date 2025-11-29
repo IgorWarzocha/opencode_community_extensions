@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -17,11 +19,18 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
   const [category, setCategory] = useState<Category | "">("");
   const [compatibility, setCompatibility] = useState<Compatibility | "">("");
 
-  const plugins = useQuery(api.plugins.list, {
-    search: search || undefined,
-    category: (category || undefined) as Category | undefined,
-    compatibility: (compatibility || undefined) as Compatibility | undefined,
-  });
+  const plugins = useQuery(
+    api.plugins.list,
+    search || category || compatibility
+      ? {
+          ...(search && { search }),
+          ...(category && { category: category as Category }),
+          ...(compatibility && {
+            compatibility: compatibility as Compatibility,
+          }),
+        }
+      : "skip",
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -62,7 +71,9 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
           category={category}
           compatibility={compatibility}
           onCategoryChange={(value) => setCategory(value as Category | "")}
-          onCompatibilityChange={(value) => setCompatibility(value as Compatibility | "")}
+          onCompatibilityChange={(value) =>
+            setCompatibility(value as Compatibility | "")
+          }
         />
       </div>
 
@@ -73,7 +84,9 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
         </div>
       ) : plugins.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-secondary">No plugins found matching your criteria.</p>
+          <p className="text-secondary">
+            No plugins found matching your criteria.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
