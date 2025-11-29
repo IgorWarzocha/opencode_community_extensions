@@ -29,7 +29,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
             compatibility: compatibility as Compatibility,
           }),
         }
-      : "skip",
+      : {},
   );
 
   return (
