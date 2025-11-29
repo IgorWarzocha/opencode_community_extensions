@@ -36,8 +36,10 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Hero Section */}
       <div className="mb-16 max-w-3xl">
-        <h1 className="text-5xl font-bold mb-6">Extension Directory</h1>
-        <p className="text-xl text-secondary mb-8 leading-relaxed">
+        <h1 className="text-5xl font-bold mb-6 heading-shadow">
+          Extension Directory
+        </h1>
+        <p className="text-xl text-secondary mb-8 leading-relaxed dark:text-secondary-dark">
           Extend OpenCode with community plugins. Language servers, search
           tools, DevOps integrations, UI enhancements, and workflow automation.
         </p>
@@ -46,7 +48,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
             href="https://docs.opencode.dev/plugins"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 bg-primary text-white hover:bg-primary-hover transition-colors text-sm"
+            className="px-6 py-3 bg-primary text-background hover:bg-primary-hover transition-colors text-sm dark:bg-primary-dark dark:text-background-dark dark:hover:bg-primary-hover-dark"
           >
             Documentation
           </a>
@@ -54,7 +56,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
             href="https://github.com/opencode/plugins"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-border hover:border-primary transition-colors text-sm"
+            className="px-6 py-3 border border-border hover:border-primary transition-colors text-sm dark:border-border-dark dark:hover:border-primary-dark"
           >
             GitHub
           </a>
@@ -62,7 +64,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
       </div>
 
       {/* Divider */}
-      <div className="border-t border-border mb-12"></div>
+      <div className="border-t border-border mb-12 dark:border-border-dark"></div>
 
       {/* Search and Filters */}
       <div className="mb-12 space-y-6">
@@ -80,11 +82,13 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
       {/* Results */}
       {plugins === undefined ? (
         <div className="flex justify-center py-12">
-          <div className="text-secondary">Loading plugins...</div>
+          <div className="text-secondary dark:text-secondary-dark">
+            Loading plugins...
+          </div>
         </div>
       ) : plugins.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-secondary">
+          <p className="text-secondary dark:text-secondary-dark">
             No plugins found matching your criteria.
           </p>
         </div>

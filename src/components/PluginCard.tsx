@@ -8,10 +8,10 @@ interface PluginCardProps {
 
 export function PluginCard({ plugin, onNavigateToDetail }: PluginCardProps) {
   return (
-    <div className="border border-border p-6 hover:border-primary transition-colors bg-white">
+    <div className="border border-border p-6 hover:border-primary transition-colors bg-surface dark:bg-surface-dark dark:border-border-dark dark:hover:border-primary-dark">
       <div className="mb-4">
         <h3 className="text-lg font-semibold mb-2">{plugin.name}</h3>
-        <p className="text-sm text-secondary leading-relaxed">
+        <p className="text-sm text-secondary leading-relaxed dark:text-secondary-dark">
           {plugin.shortDescription}
         </p>
       </div>
@@ -25,7 +25,7 @@ export function PluginCard({ plugin, onNavigateToDetail }: PluginCardProps) {
 
       <button
         onClick={() => onNavigateToDetail(plugin.slug)}
-        className="text-sm text-accent hover:underline"
+        className="text-sm text-accent hover:underline dark:text-accent-dark"
       >
         View details →
       </button>

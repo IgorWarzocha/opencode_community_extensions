@@ -3,19 +3,32 @@
 @theme {
   --font-mono: "IBM Plex Mono", monospace;
 
+  /* Light theme colors */
   --color-primary: #171717;
   --color-primary-hover: #000000;
   --color-secondary: #6b7280;
   --color-accent: #007aff;
   --color-border: #e5e7eb;
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-muted: #f9fafb;
+
+  /* Dark theme colors */
+  --color-primary-dark: #f9fafb;
+  --color-primary-hover-dark: #ffffff;
+  --color-secondary-dark: #9ca3af;
+  --color-accent-dark: #3b82f6;
+  --color-border-dark: #374151;
+  --color-background-dark: #111827;
+  --color-surface-dark: #1f2937;
+  --color-muted-dark: #111827;
 
   --radius-container: 0px;
   --spacing-section: 3rem;
-
-  --color-light: #ffffff;
-  --color-dark: #171717;
-  --color-blue: #007aff;
 }
+
+/* Dark mode custom variant */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @utility accent-text {
   color: var(--color-secondary);
@@ -23,8 +36,17 @@
 
 body {
   font-family: var(--font-mono);
-  color: var(--color-dark);
-  background: var(--color-light);
+  color: var(--color-primary);
+  background: var(--color-background);
+  transition:
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+}
+
+/* Dark theme styles */
+.dark body {
+  color: var(--color-primary-dark);
+  background: var(--color-background-dark);
 }
 
 /* Base utility classes for auth components */
@@ -32,11 +54,19 @@ body {
   width: 100%;
   padding: var(--spacing-4) var(--spacing-4);
   border-radius: var(--radius-container);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   outline: none;
-  transition: box-shadow 0.15s ease-in-out;
+  transition:
+    box-shadow 0.15s ease-in-out,
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.dark .auth-input-field {
+  background-color: var(--color-surface-dark);
+  border-color: var(--color-border-dark);
 }
 
 @utility auth-button {
@@ -44,7 +74,7 @@ body {
   padding: var(--spacing-4) var(--spacing-4);
   border-radius: var(--radius-md);
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-background);
   font-weight: 600;
   transition:
     background-color 0.15s ease-in-out,
@@ -52,9 +82,27 @@ body {
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
+.dark .auth-button {
+  background-color: var(--color-primary-dark);
+  color: var(--color-background-dark);
+}
+
 /* v4.1 Text shadow utility for headings */
 @utility heading-shadow {
   text-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+}
+
+/* Custom select dropdown arrow */
+@utility custom-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25rem 1.25rem;
+  padding-right: 2.5rem;
+}
+
+.dark .custom-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
 }
 
 /* Hover and focus states should be handled with Tailwind classes in HTML */

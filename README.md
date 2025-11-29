@@ -1,5 +1,7 @@
 # Opencode Community Extensions
 
+![Opencode Community Extensions Screenshot](screenshot-2025-11-29_13-53-42.png)
+
 Discover and explore community-built extensions for the Opencode ecosystem. Browse a curated collection of plugins, tools, and integrations that enhance your development workflow.
 
 ## What You'll Find

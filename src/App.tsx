@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "./lib/theme-context";
 import { HomePage } from "./components/HomePage";
 import { PluginDetailPage } from "./components/PluginDetailPage";
 import { SubmitPluginPage } from "./components/SubmitPluginPage";
 import { Header } from "./components/Header";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 type Page = "home" | "detail" | "submit";
 
@@ -38,30 +40,35 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Header
-        onNavigateHome={navigateToHome}
-        onNavigateSubmit={navigateToSubmit}
-      />
-      <main className="flex-1">
-        {currentPage === "home" && (
-          <HomePage onNavigateToDetail={navigateToDetail} />
-        )}
-        {currentPage === "detail" && (
-          <PluginDetailPage
-            slug={selectedSlug}
-            onNavigateToDetail={navigateToDetail}
+    <ThemeProvider>
+      <div className="min-h-screen flex flex-col bg-background dark:bg-background-dark transition-colors">
+        <div className="relative">
+          <Header
             onNavigateHome={navigateToHome}
+            onNavigateSubmit={navigateToSubmit}
           />
-        )}
-        {currentPage === "submit" && (
-          <SubmitPluginPage
-            onNavigateToDetail={navigateToDetail}
-            onNavigateHome={navigateToHome}
-          />
-        )}
-      </main>
-      <Toaster />
-    </div>
+          <ThemeToggle />
+        </div>
+        <main className="flex-1">
+          {currentPage === "home" && (
+            <HomePage onNavigateToDetail={navigateToDetail} />
+          )}
+          {currentPage === "detail" && (
+            <PluginDetailPage
+              slug={selectedSlug}
+              onNavigateToDetail={navigateToDetail}
+              onNavigateHome={navigateToHome}
+            />
+          )}
+          {currentPage === "submit" && (
+            <SubmitPluginPage
+              onNavigateToDetail={navigateToDetail}
+              onNavigateHome={navigateToHome}
+            />
+          )}
+        </main>
+        <Toaster />
+      </div>
+    </ThemeProvider>
   );
 }
