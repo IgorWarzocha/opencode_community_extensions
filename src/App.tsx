@@ -7,6 +7,7 @@ import { HomePage } from "./components/HomePage";
 import { PluginDetailPage } from "./components/PluginDetailPage";
 import { SubmitPluginPage } from "./components/SubmitPluginPage";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { ThemeToggle } from "./components/ThemeToggle";
 
 export type Page = "home" | "detail" | "submit";
@@ -67,6 +68,7 @@ export default function App() {
             />
           )}
         </main>
+        <Footer />
         <Toaster />
       </div>
     </ThemeProvider>
