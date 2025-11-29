@@ -1,7 +1,11 @@
 import { mutation } from "./_generated/server";
+import { v } from "convex/values";
 
 export const seedPlugins = mutation({
   args: {},
+  returns: v.object({
+    message: v.string(),
+  }),
   handler: async (ctx) => {
     const existingPlugins = await ctx.db.query("plugins").collect();
     if (existingPlugins.length > 0) {

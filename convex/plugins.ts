@@ -10,8 +10,8 @@ export const list = query({
         v.literal("RAG/Search"),
         v.literal("DevOps"),
         v.literal("UI"),
-        v.literal("Workflow")
-      )
+        v.literal("Workflow"),
+      ),
     ),
     compatibility: v.optional(
       v.union(
@@ -19,34 +19,35 @@ export const list = query({
         v.literal("cli"),
         v.literal("ide"),
         v.literal("server"),
-        v.literal("zen")
-      )
+        v.literal("zen"),
+      ),
     ),
   },
+  returns: v.array(v.any()),
   handler: async (ctx, args) => {
     let plugins = await ctx.db
       .query("plugins")
-      .withIndex("by_status", (q) => q.eq("status", "published"))
+      .withIndex("by_status", (q: any) => q.eq("status", "published"))
       .order("desc")
       .collect();
 
     if (args.search) {
       const searchLower = args.search.toLowerCase();
       plugins = plugins.filter(
-        (p) =>
+        (p: any) =>
           p.name.toLowerCase().includes(searchLower) ||
           p.shortDescription.toLowerCase().includes(searchLower) ||
-          p.description.toLowerCase().includes(searchLower)
+          p.description.toLowerCase().includes(searchLower),
       );
     }
 
     if (args.category) {
-      plugins = plugins.filter((p) => p.category === args.category);
+      plugins = plugins.filter((p: any) => p.category === args.category);
     }
 
     if (args.compatibility) {
-      plugins = plugins.filter((p) =>
-        p.compatibility.includes(args.compatibility!)
+      plugins = plugins.filter((p: any) =>
+        p.compatibility.includes(args.compatibility!),
       );
     }
 
@@ -56,10 +57,11 @@ export const list = query({
 
 export const getBySlug = query({
   args: { slug: v.string() },
+  returns: v.union(v.null(), v.any()),
   handler: async (ctx, args) => {
     const plugin = await ctx.db
       .query("plugins")
-      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .withIndex("by_slug", (q: any) => q.eq("slug", args.slug))
       .first();
     return plugin;
   },
@@ -72,16 +74,17 @@ export const getRelated = query({
       v.literal("RAG/Search"),
       v.literal("DevOps"),
       v.literal("UI"),
-      v.literal("Workflow")
+      v.literal("Workflow"),
     ),
     currentSlug: v.string(),
   },
+  returns: v.array(v.any()),
   handler: async (ctx, args) => {
     const plugins = await ctx.db
       .query("plugins")
-      .withIndex("by_category", (q) => q.eq("category", args.category))
-      .filter((q) => q.neq(q.field("slug"), args.currentSlug))
-      .filter((q) => q.eq(q.field("status"), "published"))
+      .withIndex("by_category", (q: any) => q.eq("category", args.category))
+      .filter((q: any) => q.neq(q.field("slug"), args.currentSlug))
+      .filter((q: any) => q.eq(q.field("status"), "published"))
       .take(3);
     return plugins;
   },
@@ -98,7 +101,7 @@ export const submit = mutation({
       v.literal("RAG/Search"),
       v.literal("DevOps"),
       v.literal("UI"),
-      v.literal("Workflow")
+      v.literal("Workflow"),
     ),
     tags: v.array(v.string()),
     compatibility: v.array(
@@ -107,8 +110,8 @@ export const submit = mutation({
         v.literal("cli"),
         v.literal("ide"),
         v.literal("server"),
-        v.literal("zen")
-      )
+        v.literal("zen"),
+      ),
     ),
     features: v.array(v.string()),
     repoUrl: v.string(),
@@ -117,10 +120,11 @@ export const submit = mutation({
     authorName: v.string(),
     authorGithub: v.optional(v.string()),
   },
+  returns: v.id("plugins"),
   handler: async (ctx, args) => {
     const existing = await ctx.db
       .query("plugins")
-      .withIndex("by_slug", (q) => q.eq("slug", args.slug))
+      .withIndex("by_slug", (q: any) => q.eq("slug", args.slug))
       .first();
 
     if (existing) {

@@ -1,4 +1,4 @@
-import { Doc } from "../../convex/_generated/dataModel";
+import type { Doc } from "../../convex/_generated/dataModel.js";
 import { TagChip } from "./TagChip";
 
 interface PluginCardProps {
