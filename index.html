@@ -11,6 +11,12 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script type="module">
+      // Import react-grab in development
+      if (import.meta.env.DEV) {
+        import("react-grab");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
