@@ -1,12 +1,17 @@
-interface FilterBarProps {
+import {
+  PLUGIN_CATEGORIES,
+  COMPATIBILITY_OPTIONS,
+} from "../constants/plugin-form.js";
+
+export interface FilterBarProps {
   category: string;
   compatibility: string;
   onCategoryChange: (value: string) => void;
   onCompatibilityChange: (value: string) => void;
 }
 
-const categories = ["LSP", "RAG/Search", "DevOps", "UI", "Workflow"];
-const compatibilityOptions = ["tui", "cli", "ide", "server", "zen"];
+const categories = PLUGIN_CATEGORIES;
+const compatibilityOptions = COMPATIBILITY_OPTIONS;
 
 export function FilterBar({
   category,

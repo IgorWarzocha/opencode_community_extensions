@@ -1,4 +1,4 @@
-interface TagChipProps {
+export interface TagChipProps {
   label: string;
   variant?: "category" | "compatibility" | "tag";
 }

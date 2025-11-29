@@ -9,7 +9,7 @@ import { SubmitPluginPage } from "./components/SubmitPluginPage";
 import { Header } from "./components/Header";
 import { ThemeToggle } from "./components/ThemeToggle";
 
-type Page = "home" | "detail" | "submit";
+export type Page = "home" | "detail" | "submit";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("home");

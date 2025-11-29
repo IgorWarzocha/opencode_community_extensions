@@ -1,7 +1,7 @@
 import type { Doc } from "../../convex/_generated/dataModel.js";
 import { TagChip } from "./TagChip";
 
-interface PluginCardProps {
+export interface PluginCardProps {
   plugin: Doc<"plugins">;
   onNavigateToDetail: (slug: string) => void;
 }

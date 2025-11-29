@@ -1,4 +1,4 @@
-interface CodeBlockProps {
+export interface CodeBlockProps {
   code: string;
 }
 

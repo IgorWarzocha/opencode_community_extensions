@@ -1,4 +1,4 @@
-interface HeaderProps {
+export interface HeaderProps {
   onNavigateHome: () => void;
   onNavigateSubmit: () => void;
 }
