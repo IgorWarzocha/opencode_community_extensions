@@ -19,8 +19,6 @@ import type * as data_authors from "../data/authors.js";
 import type * as extensions from "../extensions.js";
 import type * as http from "../http.js";
 import type * as migrate from "../migrate.js";
-import type * as migrate_all_extensions from "../migrate_all_extensions.js";
-import type * as migrate_verified from "../migrate_verified.js";
 import type * as router from "../router.js";
 import type * as schema_analytics from "../schema/analytics.js";
 import type * as schema_authors from "../schema/authors.js";
@@ -45,8 +43,6 @@ declare const fullApi: ApiFromModules<{
   extensions: typeof extensions;
   http: typeof http;
   migrate: typeof migrate;
-  migrate_all_extensions: typeof migrate_all_extensions;
-  migrate_verified: typeof migrate_verified;
   router: typeof router;
   "schema/analytics": typeof schema_analytics;
   "schema/authors": typeof schema_authors;
