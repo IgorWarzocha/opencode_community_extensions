@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useMutation } from "convex/react";
+import { useState } from "react";
 import { api } from "../convex/_generated/api";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "./lib/theme-context";
@@ -15,16 +14,6 @@ export type Page = "home" | "detail" | "submit";
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>("home");
   const [selectedSlug, setSelectedSlug] = useState<string>("");
-  const seedPlugins = useMutation(api.seed.seedPlugins);
-  const [hasSeeded, setHasSeeded] = useState(false);
-
-  useEffect(() => {
-    if (!hasSeeded) {
-      seedPlugins()
-        .then(() => setHasSeeded(true))
-        .catch(() => setHasSeeded(true));
-    }
-  }, [hasSeeded, seedPlugins]);
 
   const navigateToHome = () => {
     setCurrentPage("home");

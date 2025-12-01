@@ -6,25 +6,49 @@
  */
 
 import type {
-  PLUGIN_CATEGORIES,
+  EXTENSION_CATEGORIES,
+  EXTENSION_TYPES,
   COMPATIBILITY_OPTIONS,
+  INSTALLATION_METHODS,
+  PACKAGE_MANAGERS,
+  STATUS_OPTIONS,
 } from "../constants/plugin-form.js";
 
 /**
- * Plugin category type derived from constants
+ * Extension category type derived from constants
  */
-export type PluginCategory = (typeof PLUGIN_CATEGORIES)[number];
+export type ExtensionCategory = (typeof EXTENSION_CATEGORIES)[number];
 
 /**
- * Plugin compatibility type derived from constants
+ * Extension type derived from constants
  */
-export type PluginCompatibility = (typeof COMPATIBILITY_OPTIONS)[number];
+export type ExtensionType = (typeof EXTENSION_TYPES)[number];
 
 /**
- * Form data structure for plugin submission
+ * Extension compatibility type derived from constants
  */
-export interface PluginFormData {
-  /** Plugin display name */
+export type ExtensionCompatibility = (typeof COMPATIBILITY_OPTIONS)[number];
+
+/**
+ * Installation method type derived from constants
+ */
+export type InstallationMethod = (typeof INSTALLATION_METHODS)[number];
+
+/**
+ * Package manager type derived from constants
+ */
+export type PackageManager = (typeof PACKAGE_MANAGERS)[number];
+
+/**
+ * Extension status type derived from constants
+ */
+export type ExtensionStatus = (typeof STATUS_OPTIONS)[number];
+
+/**
+ * Form data structure for extension submission
+ */
+export interface ExtensionFormData {
+  /** Extension display name */
   name: string;
   /** URL-friendly identifier */
   slug: string;
@@ -32,35 +56,78 @@ export interface PluginFormData {
   shortDescription: string;
   /** Detailed description */
   description: string;
-  /** Plugin category */
-  category: PluginCategory;
+  /** Extension category */
+  category: ExtensionCategory;
+  /** Extension type */
+  extensionType: ExtensionType;
   /** Comma-separated tags (as string for form input) */
   tags: string;
   /** Selected compatibility options */
-  compatibility: PluginCompatibility[];
+  compatibility: ExtensionCompatibility[];
   /** Line-separated features (as string for form input) */
   features: string;
+  /** Line-separated capabilities (as string for form input) */
+  capabilities?: string;
   /** Repository URL */
   repoUrl: string;
   /** Documentation URL (optional) */
   docsUrl?: string;
-  /** Plugin version */
+  /** Homepage URL (optional) */
+  homepageUrl?: string;
+  /** Changelog URL (optional) */
+  changelogUrl?: string;
+  /** Extension version */
   version: string;
-  /** Author display name */
-  authorName: string;
-  /** Author GitHub username (optional) */
-  authorGithub?: string;
+  /** Latest version */
+  latestVersion: string;
+  /** Installation methods */
+  installationMethods: InstallationMethod[];
+  /** Installation command (optional) */
+  installationCommand?: string;
+  /** Configuration guide URL (optional) */
+  configurationGuide?: string;
+  /** GitHub repository (optional) */
+  githubRepo?: string;
+  /** Package name (optional) */
+  packageName?: string;
+  /** Package manager (optional) */
+  packageManager?: PackageManager;
+  /** Logo URL (optional) */
+  logoUrl?: string;
+  /** Screenshots (comma-separated URLs) */
+  screenshots?: string;
+  /** Demo URL (optional) */
+  demoUrl?: string;
+  /** License (optional) */
+  license?: string;
+  /** License URL (optional) */
+  licenseUrl?: string;
+  /** Meta title (optional) */
+  metaTitle?: string;
+  /** Meta description (optional) */
+  metaDescription?: string;
+  /** Keywords (comma-separated) */
+  keywords?: string;
 }
 
 /**
  * Parsed form data with arrays processed
  */
-export interface ParsedPluginData
-  extends Omit<PluginFormData, "tags" | "features"> {
+export interface ParsedExtensionData
+  extends Omit<
+    ExtensionFormData,
+    "tags" | "features" | "capabilities" | "screenshots" | "keywords"
+  > {
   /** Parsed tags array */
   tags: string[];
   /** Parsed features array */
   features: string[];
+  /** Parsed capabilities array */
+  capabilities?: string[];
+  /** Parsed screenshots array */
+  screenshots?: string[];
+  /** Parsed keywords array */
+  keywords?: string[];
 }
 
 /**
@@ -74,9 +141,9 @@ export interface FormSubmissionResult {
 }
 
 /**
- * SubmitPluginPage component props
+ * SubmitExtensionPage component props
  */
-export interface SubmitPluginPageProps {
+export interface SubmitExtensionPageProps {
   /** Navigation handler for successful submission */
   onNavigateToDetail: (slug: string) => void;
   /** Navigation handler for cancel/back action */

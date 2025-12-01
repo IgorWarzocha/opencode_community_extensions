@@ -5,14 +5,15 @@ import { FormInput } from "../FormInput.js";
 import { FormTextarea } from "../FormTextarea.js";
 import { CheckboxGroup } from "../CheckboxGroup.js";
 import {
-  PLUGIN_CATEGORIES,
+  EXTENSION_CATEGORIES,
+  EXTENSION_TYPES,
   COMPATIBILITY_OPTIONS,
   FORM_PLACEHOLDERS,
 } from "../../../constants/plugin-form.js";
 
 /**
- * Classification section for plugin submission form
- * Contains category, tags, compatibility, and features fields
+ * Classification section for extension submission form
+ * Contains category, extension type, tags, compatibility, and features fields
  */
 export function ClassificationSection() {
   return (
@@ -23,7 +24,22 @@ export function ClassificationSection() {
         <label className="block text-sm text-secondary mb-2 dark:text-secondary-dark">
           Category *
         </label>
-        <FormSelect name="category" required options={[...PLUGIN_CATEGORIES]} />
+        <FormSelect
+          name="category"
+          required
+          options={[...EXTENSION_CATEGORIES]}
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm text-secondary mb-2 dark:text-secondary-dark">
+          Extension Type *
+        </label>
+        <FormSelect
+          name="extensionType"
+          required
+          options={[...EXTENSION_TYPES]}
+        />
       </div>
 
       <div>
@@ -48,6 +64,17 @@ export function ClassificationSection() {
           name="features"
           rows={5}
           placeholder={FORM_PLACEHOLDERS.features}
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm text-secondary mb-2 dark:text-secondary-dark">
+          Capabilities (one per line, optional)
+        </label>
+        <FormTextarea
+          name="capabilities"
+          rows={3}
+          placeholder={FORM_PLACEHOLDERS.capabilities}
         />
       </div>
     </div>

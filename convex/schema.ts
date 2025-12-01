@@ -1,41 +1,63 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+/**
+ * Comprehensive OpenCode Extensions Directory Schema
+ *
+ * Modular schema design supporting 23+ extensions with proper categorization,
+ * search, version management, user content, analytics, and workflow management.
+ *
+ * Schema modules:
+ * - extensions: Core extension data with GitHub integration
+ * - authors: Author profiles and verification
+ * - reviews: User-generated content and ratings
+ * - compatibility: Platform compatibility matrix
+ * - analytics: Usage statistics and trending
+ * - workflow: Submission workflow and user activity
+ * - taxonomy: Categories and tags management
+ */
+
+import { defineSchema } from "convex/server";
 import { authTables } from "@convex-dev/auth/server";
 
+// Import modular schema definitions
+import { extensionsTable } from "./schema/extensions.js";
+import { authorsTable } from "./schema/authors.js";
+import { reviewsTable } from "./schema/reviews.js";
+import {
+  compatibilityTable,
+  dependenciesTable,
+} from "./schema/compatibility.js";
+import { analyticsTable, trendingTable } from "./schema/analytics.js";
+import {
+  submissionsTable,
+  userFavoritesTable,
+  userActivityTable,
+} from "./schema/workflow.js";
+import { categoriesTable, tagsTable } from "./schema/taxonomy.js";
+
+// Consolidated application tables
 const applicationTables = {
-  plugins: defineTable({
-    name: v.string(),
-    slug: v.string(),
-    shortDescription: v.string(),
-    description: v.string(),
-    category: v.union(
-      v.literal("LSP"),
-      v.literal("RAG/Search"),
-      v.literal("DevOps"),
-      v.literal("UI"),
-      v.literal("Workflow")
-    ),
-    tags: v.array(v.string()),
-    compatibility: v.array(
-      v.union(
-        v.literal("tui"),
-        v.literal("cli"),
-        v.literal("ide"),
-        v.literal("server"),
-        v.literal("zen")
-      )
-    ),
-    features: v.array(v.string()),
-    repoUrl: v.string(),
-    docsUrl: v.optional(v.string()),
-    version: v.string(),
-    authorName: v.string(),
-    authorGithub: v.optional(v.string()),
-    status: v.union(v.literal("draft"), v.literal("published")),
-  })
-    .index("by_slug", ["slug"])
-    .index("by_category", ["category"])
-    .index("by_status", ["status"]),
+  // Core entities
+  extensions: extensionsTable,
+  authors: authorsTable,
+
+  // User-generated content
+  reviews: reviewsTable,
+
+  // Compatibility and dependencies
+  compatibility: compatibilityTable,
+  dependencies: dependenciesTable,
+
+  // Analytics and trending
+  analytics: analyticsTable,
+  trending: trendingTable,
+
+  // Workflow and user management
+  submissions: submissionsTable,
+  userFavorites: userFavoritesTable,
+  userActivity: userActivityTable,
+
+  // Taxonomy
+  categories: categoriesTable,
+  tags: tagsTable,
 };
 
 export default defineSchema({

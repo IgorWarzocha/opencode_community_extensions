@@ -24,7 +24,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
     filters,
   } = usePluginFilters();
 
-  const plugins = useQuery(api.plugins.list, filters);
+  const extensions = useQuery(api.extensions.list, filters);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -51,7 +51,7 @@ export function HomePage({ onNavigateToDetail }: HomePageProps) {
 
       {/* Results */}
       <ResultsSection
-        plugins={plugins}
+        plugins={extensions}
         onNavigateToDetail={onNavigateToDetail}
       />
     </div>

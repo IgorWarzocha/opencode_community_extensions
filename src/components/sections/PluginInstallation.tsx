@@ -1,12 +1,14 @@
 import type { Doc } from "../../../convex/_generated/dataModel";
 import { CodeBlock } from "../CodeBlock";
 
-interface PluginInstallationProps {
-  plugin: Doc<"plugins">;
+export interface PluginInstallationProps {
+  plugin: Doc<"extensions">;
 }
 
 export function PluginInstallation({ plugin }: PluginInstallationProps) {
-  const installCommand = `opencode plugin install ${plugin.slug}`;
+  const installCommand =
+    plugin.installationCommand ||
+    `# Installation instructions for ${plugin.name}`;
 
   return (
     <div className="mb-12">

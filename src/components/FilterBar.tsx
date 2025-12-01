@@ -1,5 +1,5 @@
 import {
-  PLUGIN_CATEGORIES,
+  EXTENSION_CATEGORIES,
   COMPATIBILITY_OPTIONS,
 } from "../constants/plugin-form.js";
 
@@ -10,7 +10,7 @@ export interface FilterBarProps {
   onCompatibilityChange: (value: string) => void;
 }
 
-const categories = PLUGIN_CATEGORIES;
+const categories = EXTENSION_CATEGORIES;
 const compatibilityOptions = COMPATIBILITY_OPTIONS;
 
 export function FilterBar({

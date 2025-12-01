@@ -18,9 +18,9 @@ export function PluginDetailPage({
   onNavigateToDetail,
   onNavigateHome,
 }: PluginDetailPageProps) {
-  const plugin = useQuery(api.plugins.getBySlug, { slug });
+  const plugin = useQuery(api.extensions.getBySlug, { slug });
   const relatedPlugins = useQuery(
-    api.plugins.getRelated,
+    api.extensions.getRelated,
     plugin ? { category: plugin.category, currentSlug: slug } : "skip",
   );
 

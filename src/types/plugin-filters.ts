@@ -6,24 +6,24 @@
  */
 
 import type {
-  PLUGIN_CATEGORIES,
+  EXTENSION_CATEGORIES,
   COMPATIBILITY_OPTIONS,
 } from "../constants/plugin-form.js";
 
 /**
- * Plugin category type for filters (derived from constants)
+ * Extension category type for filters (derived from constants)
  */
-export type Category = (typeof PLUGIN_CATEGORIES)[number];
+export type Category = (typeof EXTENSION_CATEGORIES)[number];
 
 /**
- * Plugin compatibility type for filters (derived from constants)
+ * Extension compatibility type for filters (derived from constants)
  */
 export type Compatibility = (typeof COMPATIBILITY_OPTIONS)[number];
 
 /**
  * Filter state interface for managing filter values
  */
-export interface PluginFilterState {
+export interface ExtensionFilterState {
   /** Search query string */
   search: string;
   /** Selected category filter */
@@ -35,7 +35,7 @@ export interface PluginFilterState {
 /**
  * Filter object interface for useQuery API
  */
-export interface PluginFilters {
+export interface ExtensionFilters {
   /** Optional search query */
   search?: string;
   /** Optional category filter */
@@ -45,9 +45,9 @@ export interface PluginFilters {
 }
 
 /**
- * Return type for usePluginFilters hook
+ * Return type for useExtensionFilters hook
  */
-export interface UsePluginFiltersReturn {
+export interface UseExtensionFiltersReturn {
   /** Current search value */
   search: string;
   /** Current category value */
@@ -61,5 +61,5 @@ export interface UsePluginFiltersReturn {
   /** Setter for compatibility value */
   setCompatibility: (value: Compatibility | "") => void;
   /** Constructed filters object for useQuery */
-  filters: PluginFilters;
+  filters: ExtensionFilters;
 }

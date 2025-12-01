@@ -5,22 +5,26 @@
  * the application, following TypeScript 5.9+ best practices with verbatimModuleSyntax.
  */
 
-// Plugin domain types
+// Extension domain types
 export type {
-  PluginCategory,
-  PluginCompatibility,
-  PluginFormData,
-  ParsedPluginData,
+  ExtensionCategory,
+  ExtensionType,
+  ExtensionCompatibility,
+  InstallationMethod,
+  PackageManager,
+  ExtensionStatus,
+  ExtensionFormData,
+  ParsedExtensionData,
   FormSubmissionResult,
-  SubmitPluginPageProps,
+  SubmitExtensionPageProps,
 } from "./plugin-form.js";
 
 export type {
   Category,
   Compatibility,
-  PluginFilterState,
-  PluginFilters,
-  UsePluginFiltersReturn,
+  ExtensionFilterState,
+  ExtensionFilters,
+  UseExtensionFiltersReturn,
 } from "./plugin-filters.js";
 
 // Form component types

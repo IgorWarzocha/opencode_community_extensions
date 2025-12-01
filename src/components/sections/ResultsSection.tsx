@@ -2,7 +2,7 @@ import type { Doc } from "../../../convex/_generated/dataModel.js";
 import { PluginCard } from "../PluginCard";
 
 export interface ResultsSectionProps {
-  plugins: Doc<"plugins">[] | undefined | null;
+  plugins: Doc<"extensions">[] | undefined | null;
   onNavigateToDetail: (slug: string) => void;
 }
 

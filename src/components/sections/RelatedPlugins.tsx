@@ -1,7 +1,7 @@
 import type { Doc } from "../../../convex/_generated/dataModel";
 
-interface RelatedPluginsProps {
-  relatedPlugins: Doc<"plugins">[];
+export interface RelatedPluginsProps {
+  relatedPlugins: Doc<"extensions">[];
   category: string;
   onNavigateToDetail: (slug: string) => void;
 }
