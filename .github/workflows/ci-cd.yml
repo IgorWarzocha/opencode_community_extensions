@@ -1,0 +1,222 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: "20"
+  CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+
+jobs:
+  # Code Quality and Testing
+  test:
+    name: Test and Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run type checking
+        run: npx tsc --noEmit
+
+      - name: Run unit tests
+        run: npm run test:run
+
+      - name: Run integration tests
+        run: npm run test:integration
+        env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+          VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL }}
+
+  # Security Scanning
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security audit
+        run: npm audit --audit-level=moderate
+
+      - name: Run security tests
+        run: npm run test:security
+
+  # Build and Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [test, security]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+        env:
+          VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL_STAGING }}
+          VITE_APP_ENV: staging
+
+      - name: Deploy to Vercel Staging
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+      - name: Deploy Convex to Staging
+        run: npx convex deploy --cmd 'npm run build'
+        env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT_STAGING }}
+
+      - name: Run smoke tests
+        run: npm run test:smoke
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+
+  # Build and Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [test, security]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create backup before deployment
+        run: |
+          curl -X POST "${{ secrets.BACKUP_API_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.BACKUP_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"type": "pre-deploy", "environment": "production"}'
+
+      - name: Build application
+        run: npm run build
+        env:
+          VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL }}
+          VITE_APP_ENV: production
+
+      - name: Deploy to Vercel Production
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+
+      - name: Deploy Convex to Production
+        run: npx convex deploy --cmd 'npm run build'
+        env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+
+      - name: Run production smoke tests
+        run: npm run test:smoke
+        env:
+          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+
+      - name: Create post-deployment backup
+        run: |
+          curl -X POST "${{ secrets.BACKUP_API_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.BACKUP_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"type": "post-deploy", "environment": "production"}'
+
+      - name: Notify deployment success
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          channel: "#deployments"
+          text: "🚀 Production deployment successful!"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # Performance and Load Testing
+  performance-test:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run load tests
+        run: npm run test:load
+        env:
+          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+
+      - name: Run performance benchmarks
+        run: npm run test:performance
+        env:
+          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results
+          path: test-results/
+          retention-days: 30

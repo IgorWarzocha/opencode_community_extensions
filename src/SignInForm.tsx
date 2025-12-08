@@ -1,37 +1,49 @@
 "use client";
 import { useAuthActions } from "@convex-dev/auth/react";
+import type { FormEvent } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export function SignInForm() {
   const { signIn } = useAuthActions();
-  const [flow, setFlow] = useState<"signIn" | "signUp">("signIn");
   const [submitting, setSubmitting] = useState(false);
+  const [flow, setFlow] = useState<"signIn" | "signUp">("signIn");
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    const formData = new FormData(event.currentTarget);
+    formData.set("flow", flow);
+
+    void signIn("password", formData)
+      .catch((error: unknown) => {
+        if (
+          error instanceof Error &&
+          error.message.includes("Invalid password") &&
+          flow === "signIn"
+        ) {
+          toast.error("Invalid password. Please try again.");
+          return;
+        }
+
+        const message =
+          flow === "signUp"
+            ? "Could not create account. Contact an admin if this persists."
+            : "Could not sign in. Contact an admin to request access.";
+        toast.error(message);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
+
+  const toggleFlow = () => {
+    setFlow((prev) => (prev === "signIn" ? "signUp" : "signIn"));
+  };
 
   return (
-    <div className="w-full">
-      <form
-        className="flex flex-col gap-form-field"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSubmitting(true);
-          const formData = new FormData(e.target as HTMLFormElement);
-          formData.set("flow", flow);
-          void signIn("password", formData).catch((error) => {
-            let toastTitle = "";
-            if (error.message.includes("Invalid password")) {
-              toastTitle = "Invalid password. Please try again.";
-            } else {
-              toastTitle =
-                flow === "signIn"
-                  ? "Could not sign in, did you mean to sign up?"
-                  : "Could not sign up, did you mean to sign in?";
-            }
-            toast.error(toastTitle);
-            setSubmitting(false);
-          });
-        }}
-      >
+    <div className="w-full space-y-3">
+      <form className="flex flex-col gap-form-field" onSubmit={handleSubmit}>
         <input
           className="auth-input-field hover:shadow-md focus:border-primary focus:ring-1 focus:ring-primary"
           type="email"
@@ -51,33 +63,18 @@ export function SignInForm() {
           type="submit"
           disabled={submitting}
         >
-          {flow === "signIn" ? "Sign in" : "Sign up"}
+          {flow === "signUp" ? "Create account" : "Sign in"}
         </button>
-        <div className="text-center text-sm text-secondary">
-          <span>
-            {flow === "signIn"
-              ? "Don't have an account? "
-              : "Already have an account? "}
-          </span>
-          <button
-            type="button"
-            className="text-primary hover:text-primary-hover hover:underline font-medium cursor-pointer"
-            onClick={() => setFlow(flow === "signIn" ? "signUp" : "signIn")}
-          >
-            {flow === "signIn" ? "Sign up instead" : "Sign in instead"}
-          </button>
-        </div>
       </form>
-      <div className="flex items-center justify-center my-3">
-        <hr className="my-4 grow border-gray-200" />
-        <span className="mx-4 text-secondary">or</span>
-        <hr className="my-4 grow border-gray-200" />
-      </div>
       <button
-        className="auth-button hover:bg-primary-hover hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-        onClick={() => void signIn("anonymous")}
+        type="button"
+        className="text-sm text-primary underline underline-offset-4 hover:text-primary-hover"
+        onClick={toggleFlow}
+        disabled={submitting}
       >
-        Sign in anonymously
+        {flow === "signUp"
+          ? "Have an account? Sign in"
+          : "Need access? Create an account"}
       </button>
     </div>
   );

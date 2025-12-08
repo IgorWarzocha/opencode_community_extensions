@@ -9,12 +9,12 @@ import {
   ClassificationSection,
   MetadataSection,
 } from "./forms/index.js";
-import type { SubmitPluginPageProps } from "../types/index.js";
+import type { SubmitExtensionPageProps } from "../types/index.js";
 
 export function SubmitPluginPage({
   onNavigateToDetail,
   onNavigateHome,
-}: SubmitPluginPageProps) {
+}: SubmitExtensionPageProps) {
   const [state, action] = useActionState(submitPlugin, null);
 
   // Handle successful submission

@@ -12,7 +12,7 @@ export function PluginMetadata({ plugin }: PluginMetadataProps) {
   return (
     <div className="mb-12">
       <h2 className="text-2xl font-semibold mb-4">Metadata</h2>
-      <div className="grid grid-cols-2 gap-4 text-sm">
+      <div className="grid grid-cols-3 md:grid-cols-4 gap-4 text-sm">
         <div>
           <div className="text-secondary mb-1 dark:text-secondary-dark">
             Version
@@ -31,16 +31,57 @@ export function PluginMetadata({ plugin }: PluginMetadataProps) {
             ) : (
               <div>
                 <div className="font-medium">{author.name}</div>
-                {author.githubUsername && (
-                  <a
-                    href={`https://github.com/${author.githubUsername}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-accent hover:underline text-xs dark:text-accent-dark"
-                  >
-                    @{author.githubUsername}
-                  </a>
-                )}
+                {(() => {
+                  if (author.githubUsername) {
+                    return (
+                      <a
+                        href={`https://github.com/${author.githubUsername}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent hover:underline text-xs dark:text-accent-dark"
+                      >
+                        @{author.githubUsername}
+                      </a>
+                    );
+                  }
+                  if (author.websiteUrl) {
+                    return (
+                      <a
+                        href={author.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent hover:underline text-xs dark:text-accent-dark"
+                      >
+                        Website
+                      </a>
+                    );
+                  }
+                  if (author.twitterUsername) {
+                    return (
+                      <a
+                        href={`https://twitter.com/${author.twitterUsername}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent hover:underline text-xs dark:text-accent-dark"
+                      >
+                        @{author.twitterUsername}
+                      </a>
+                    );
+                  }
+                  if (author.linkedinUrl) {
+                    return (
+                      <a
+                        href={author.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent hover:underline text-xs dark:text-accent-dark"
+                      >
+                        LinkedIn
+                      </a>
+                    );
+                  }
+                  return null;
+                })()}
               </div>
             )}
           </div>
@@ -77,6 +118,7 @@ export function PluginMetadata({ plugin }: PluginMetadataProps) {
             </div>
           </div>
         )}
+        {!plugin.docsUrl && <div></div>}
       </div>
     </div>
   );

@@ -77,9 +77,6 @@ export type { HomePageProps } from "../components/HomePage.js";
 // Theme types
 export type { Theme, ThemeContextType } from "../lib/theme-context.js";
 
-// App types
-export type { Page } from "../App.js";
-
 // Validation types
 export type { ValidationError, ValidationResult } from "../lib/validators.js";
 

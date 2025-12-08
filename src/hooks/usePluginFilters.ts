@@ -5,27 +5,23 @@
  * following React 19.2 patterns and Single Responsibility principle.
  */
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import type {
   Category,
   Compatibility,
-  PluginFilters,
-  UsePluginFiltersReturn,
+  ExtensionFilters,
+  UseExtensionFiltersReturn,
 } from "../types/plugin-filters.js";
 
 /**
- * Custom hook for managing plugin filter state and constructing filter objects
- * @returns Filter state, setters, and constructed filters object
+ * Custom hook for managing plugin filter state and constructing filter objects.
  */
-export function usePluginFilters(): UsePluginFiltersReturn {
-  // Filter state management
+export function usePluginFilters(): UseExtensionFiltersReturn {
   const [search, setSearch] = useState<string>("");
   const [category, setCategory] = useState<Category | "">("");
   const [compatibility, setCompatibility] = useState<Compatibility | "">("");
 
-  // Construct filters object for useQuery
-  const filters = useMemo((): PluginFilters => {
-    // Only include non-empty filters in the query object
+  const filters = useMemo<ExtensionFilters>(() => {
     if (!search && !category && !compatibility) {
       return {};
     }

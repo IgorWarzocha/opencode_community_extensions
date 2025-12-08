@@ -42,6 +42,12 @@ export interface ExtensionFilters {
   category?: Category;
   /** Optional compatibility filter */
   compatibility?: Compatibility;
+  /** Optional featured flag */
+  featured?: boolean;
+  /** Optional verified flag */
+  verified?: boolean;
+  /** Optional limit for listings */
+  limit?: number;
 }
 
 /**
